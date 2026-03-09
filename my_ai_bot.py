@@ -26,14 +26,14 @@ with st.sidebar:
         st.rerun()
         
     st.markdown("---")
-    st.markdown("Developed by **Muhammad Umar** 🚀")
+    st.markdown("Developed by **Muhammad Umar** 😎")
 
 # 4. Main Chat Interface
 st.title("🤖 TycoonGPT")
 
-# 5. Teri VIP API Key (Khufiya Locker Se)
-os.environ["GEMINI_API_KEY"] = st.secrets["GEMINI_API_KEY"]
-client = genai.Client()
+# 5. Teri VIP API Key (Direct Engine Fix!)
+# Lala Bhai ne yahan direct chabi laga di hai Streamlit ke locker se
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 # Chat History Memory
 if "chat_history" not in st.session_state:
