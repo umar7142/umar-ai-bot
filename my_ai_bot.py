@@ -58,7 +58,7 @@ if tera_sawal:
     with st.spinner("Tycoon AI is typing..."):
         vip_command = f"Tum ek asaan zaban bolne wale dost ho. Jawab asaan Roman Urdu mein do. Sawal: {tera_sawal}"
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-1.5-flash',
             contents=vip_command
         )
         
@@ -66,3 +66,4 @@ if tera_sawal:
     with st.chat_message("assistant", avatar="🤖"):
         st.markdown(response.text)
     st.session_state.chat_history.append({"role": "assistant", "text": response.text})
+
