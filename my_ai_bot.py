@@ -3,75 +3,69 @@ import os
 from groq import Groq
 
 # ==========================================
-# 1. DUKAAN KI BRANDING & UI SETTINGS (Gemini Style)
+# 1. GROK STYLE BRANDING & PAKISTAN FLAG 🇵🇰
 # ==========================================
-# Icon change kar diya Gemini walon (✨) jaisa
-st.set_page_config(page_title="UMAR AI", page_icon="✨", layout="wide")
+st.set_page_config(page_title="UMAR AI", page_icon="🇵🇰", layout="centered")
 
-# 🔥 HACKER CSS: Angry Bird Font + Gemini Polish
+# 🔥 HACKER CSS: ELON MUSK 'GROK' PITCH BLACK THEME
 st.markdown("""
 <style>
-    /* Google Fonts Import (Bangers for Angry Birds look, Poppins for chat) */
-    @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600&display=swap');
-    
-    /* Main Background Polish */
+    /* Pitch Black Background like Grok */
     .stApp {
-        background: radial-gradient(circle at top left, #1a1a2e, #0f172a, #000000);
-        color: white;
-        font-family: 'Poppins', sans-serif;
+        background-color: #000000;
+        color: #ffffff;
     }
     
-    /* Hide Streamlit Default Menu for Pro Look */
+    /* Clean Minimalist Title */
+    .grok-title {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 3.5rem;
+        font-weight: 800;
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 0px;
+        letter-spacing: -1.5px;
+    }
+    .grok-subtitle {
+        text-align: center;
+        color: #71717a; /* Clean Professional Gray */
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+        font-weight: 500;
+    }
+    
+    /* Hide Default Menus */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    
-    /* Sleek Header with Angry Birds Font */
-    .main-title {
-        font-family: 'Bangers', cursive;
-        font-size: 4rem;
-        letter-spacing: 2px;
-        background: -webkit-linear-gradient(45deg, #4285F4, #9b72cb, #d96570); /* Gemini Colors */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-        margin-bottom: 0px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    .sub-title {
-        text-align: center;
-        color: #94a3b8;
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-    }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 class='main-title'>✨ UMAR AI</h1>", unsafe_allow_html=True)
-st.markdown("<p class='sub-title'>Next-Gen AI | Engineered by UMAR ASIF 🚀</p>", unsafe_allow_html=True)
+st.markdown("<h1 class='grok-title'>UMAR AI 🇵🇰</h1>", unsafe_allow_html=True)
+st.markdown("<p class='grok-subtitle'>Engineered by UMAR ASIF | Python Developer, RYK</p>", unsafe_allow_html=True)
 
 # ==========================================
-# 2. SIDEBAR (3-Dot Menu / Control Panel)
+# 2. VIP SIDEBAR (Control Panel)
 # ==========================================
 with st.sidebar:
-    st.markdown("## ✨ Menu")
+    st.markdown("## ⚙️ Control Center")
     
-    # ➕ NEW CHAT BUTTON (History Clear)
-    if st.button("➕ New Chat", use_container_width=True, type="primary"):
+    # ➕ NEW CHAT BUTTON
+    if st.button("➕ New Chat", use_container_width=True):
         st.session_state.messages = []
-        st.rerun() # AI ka dimaagh wash aur page refresh!
+        st.rerun()
         
     st.divider()
     
     # 👨‍💻 ABOUT ME SECTION
-    st.markdown("### 👨‍💻 About Creator")
-    st.info("**UMAR ASIF**\n\nExpert Python Developer based in Rahim Yar Khan, Pakistan.")
+    st.markdown("### 👨‍💻 Creator")
+    st.info("**UMAR ASIF**\n\nExpert Python Developer\nRahim Yar Khan, Pakistan 🇵🇰")
     
-    # 🌐 PORTFOLIO LINK (Tera Asli Hatyar)
+    # 🌐 PORTFOLIO LINK
     st.markdown("🔗 **Portfolio:** [umar7142.github.io](https://umar7142.github.io)")
     
     st.divider()
-    st.caption("Engine: Llama 3.1 8B\n\nStatus: Online 🟢")
+    st.caption("Engine: Groq Llama 3.1\nStatus: Online 🟢")
 
 # ==========================================
 # 3. TERA ASLI DIMAAGH (API Setup)
@@ -84,16 +78,13 @@ try:
 except Exception as e:
     st.error(f"System Offline: {e}")
 
-# 🛑 UPGRADED SECRET IDENTITY CHIP (Umar Asif) 🛑
+# 🛑 UPGRADED SECRET IDENTITY CHIP (Umar Asif - Grok Vibe) 🛑
 SYSTEM_PROMPT = """
-You are 'UMAR AI', an elite, highly intelligent, and professional AI assistant powered by the latest technology. 
+You are 'UMAR AI', an elite, highly intelligent, and professional AI assistant. 
 Your creator is 'UMAR ASIF', a brilliant Python Developer from Rahim Yar Khan, Pakistan.
-Core Directives:
-1. Always maintain a helpful, smart, and slightly energetic tone.
-2. If asked about your identity or creator, proudly state: 'I am UMAR AI, engineered by the expert Python Developer UMAR ASIF from Rahim Yar Khan.'
-3. Provide crisp, structured, and highly accurate answers. Format code blocks beautifully.
-4. You perfectly understand English, Urdu, and Roman Urdu.
-5. If the user greets you, welcome them warmly. NEVER mention that you are a language model created by OpenAI, Meta, or Google. Your ONLY creator is UMAR ASIF.
+Always maintain a highly professional, concise, and helpful tone similar to Elon Musk's AI, Grok.
+If asked about your creator, proudly state: 'I am UMAR AI, engineered by UMAR ASIF from Rahim Yar Khan.'
+NEVER mention OpenAI, Meta, or Google as your creator.
 """
 
 # ==========================================
@@ -109,19 +100,16 @@ for msg in st.session_state.messages:
 # ==========================================
 # 5. USER INPUT & AI THINKING
 # ==========================================
-prompt = st.chat_input("Message UMAR AI...")
+prompt = st.chat_input("Ask UMAR AI anything...")
 
 if prompt:
-    # Print User Message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # UMAR AI Turn
     with st.chat_message("assistant"):
-        with st.spinner("Thinking... ✨"):
+        with st.spinner("Processing... ⚡"):
             try:
-                # Merge System Prompt with Conversation History
                 api_messages = [{"role": "system", "content": SYSTEM_PROMPT}] + st.session_state.messages
                 
                 completion = client.chat.completions.create(
@@ -136,6 +124,4 @@ if prompt:
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 
             except Exception as e:
-                error_msg = f"⚠️ Connection Error.\n\n**System Log:** `{str(e)}`"
-                st.error(error_msg)
-                st.session_state.messages.append({"role": "assistant", "content": error_msg})
+                st.error(f"⚠️ Error: {str(e)}")
