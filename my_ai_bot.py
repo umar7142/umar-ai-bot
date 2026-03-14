@@ -1,69 +1,73 @@
 import streamlit as st
 import os
-from google import genai
+from groq import Groq
 
-# 1. VIP ChatGPT Style Setup
-st.set_page_config(page_title="CEO AI Bot", page_icon="🤖", layout="centered")
+# 1. Dukaan Ki Branding (ChatGPT Style)
+st.set_page_config(page_title="UMAR AI", page_icon="🤖", layout="centered")
 
-# 2. Khufiya CSS (Streamlit ka watermark aur menu gayab karne ke liye)
-hide_st_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_st_style, unsafe_allow_html=True)
+st.title("🤖 UMAR AI")
+st.caption("Powered by CEO Muhammad Umar | Llama 3.1 Engine 🚀")
 
-# 3. Sidebar (Bilkul ChatGPT ke left panel ki tarah)
-with st.sidebar:
-    st.title("💼 CEO's Workspace")
-    st.markdown("Welcome to the Tycoon AI Engine.")
-    
-    # New Chat Button
-    if st.button("➕ New Chat"):
-        st.session_state.chat_history = []
-        st.rerun()
-        
-    st.markdown("---")
-    st.markdown("Developed by **Muhammad Umar** 😎")
+# 2. Tera Asli Dimaagh (API Key setup)
+API_KEY = st.secrets["GROQ_API_KEY"]
+os.environ["GROQ_API_KEY"] = API_KEY # Safe environment variable
 
-# 4. Main Chat Interface
-st.title("🤖 TycoonGPT")
+try:
+    client = Groq(api_key=API_KEY)
+except Exception as e:
+    st.error(f"Client Initialize Error: {e}")
 
-# 5. Teri VIP API Key (Direct Engine Fix!)
-# Lala Bhai ne yahan direct chabi laga di hai Streamlit ke locker se
-client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
+# 🛑 THE SECRET IDENTITY CHIP (Tera System Prompt) 🛑
+SYSTEM_PROMPT = """
+You are 'UMAR AI', a highly advanced, super-fast, and respectful AI assistant. 
+You were created by the one and only 'CEO Muhammad Umar', a top Data Tycoon, Python Developer, and Automation Expert from Rahim Yar Khan, Pakistan.
+If anyone asks who you are, what your name is, or who created you, proudly and enthusiastically say: 'Main UMAR AI hoon! Aur mujhe Pakistan ke sab se behtareen Data Tycoon aur IT Expert, CEO Muhammad Umar ne banaya hai!'
+Always be helpful, smart, and energetic. You understand English, Urdu, and Roman Urdu perfectly.
+"""
 
-# Chat History Memory
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
+# 3. Chat History Memory (Taake AI purani baatein yaad rakhe)
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-# Purani chat dikhana (Custom Avatars ke sath)
-for msg in st.session_state.chat_history:
-    avatar_icon = "🧑‍💻" if msg["role"] == "user" else "🤖"
-    with st.chat_message(msg["role"], avatar=avatar_icon):
-        st.markdown(msg["text"])
+# 4. Purane Messages Screen Par Dikhana
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
 
-# 6. Chat Input (Message likhne ki jagah)
-tera_sawal = st.chat_input("Message TycoonGPT...")
+# 5. User Ka Input Dabba (Neeche chat bar)
+prompt = st.chat_input("Umar AI se kuch bhi poocho Boss...")
 
-if tera_sawal:
-    # User ka message
-    with st.chat_message("user", avatar="🧑‍💻"):
-        st.markdown(tera_sawal)
-    st.session_state.chat_history.append({"role": "user", "text": tera_sawal})
+if prompt:
+    # Pehle user ka message screen par dikhao
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-    # AI ka jawab (Loading animation)
-    with st.spinner("Tycoon AI is typing..."):
-        vip_command = f"Tum ek asaan zaban bolne wale dost ho. Jawab asaan Roman Urdu mein do. Sawal: {tera_sawal}"
-        response = client.models.generate_content(
-            model='gemini-1.5-flash',
-            contents=vip_command
-        )
-        
-    # AI ka message screen par dikhao
-    with st.chat_message("assistant", avatar="🤖"):
-        st.markdown(response.text)
-    st.session_state.chat_history.append({"role": "assistant", "text": response.text})
-
+    # 6. UMAR AI Ki Bari (Thinking & Answering)
+    with st.chat_message("assistant"):
+        # ⏳ Tera Custom Pop-up / Spinner
+        with st.spinner("Umar bhai ka ai soch rha ha... 🤔"):
+            try:
+                # 🧠 SYSTEM CHIP KO API KE SATH JORNA (Asli Hacker Move)
+                api_messages = [{"role": "system", "content": SYSTEM_PROMPT}] + st.session_state.messages
+                
+                # Groq Server ko message bhejna (Llama 3.1 Model)
+                completion = client.chat.completions.create(
+                    model="llama-3.1-8b-instant", 
+                    messages=api_messages,
+                    temperature=0.7, 
+                    max_tokens=1024,
+                )
+                
+                # Jawab aagaya!
+                response = completion.choices[0].message.content
+                st.markdown(response)
+                
+                # Jawab ko memory mein save kar lo
+                st.session_state.messages.append({"role": "assistant", "content": response})
+                
+            except Exception as e:
+                # 🛑 Tera Custom Error Message + X-Ray (Asli Bimari)
+                error_msg = f"koi or app use kro abhi beta... 🚫\n\n**Hacker X-Ray (Asli Masla):** `{str(e)}`"
+                st.error(error_msg)
+                st.session_state.messages.append({"role": "assistant", "content": error_msg})
