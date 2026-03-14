@@ -2,3 +2,4 @@ streamlit
 groq
 pypdf
 openai
+firebase-admin
