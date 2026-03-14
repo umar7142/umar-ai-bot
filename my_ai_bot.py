@@ -3,32 +3,61 @@ import os
 from groq import Groq
 
 # ==========================================
-# 1. GROK STYLE BRANDING & PAKISTAN FLAG 🇵🇰
+# 1. VIP BRANDING & .PK 🇵🇰
 # ==========================================
-st.set_page_config(page_title="UMAR AI", page_icon="🇵🇰", layout="centered")
+st.set_page_config(page_title="UMAR AI .pk", page_icon="🇵🇰", layout="centered")
 
-# 🔥 HACKER CSS: ELON MUSK 'GROK' PITCH BLACK THEME
+# 🔥 HACKER CSS: 100% PITCH BLACK THEME (No White Spots!)
 st.markdown("""
 <style>
-    /* Pitch Black Background like Grok */
-    .stApp {
-        background-color: #000000;
-        color: #ffffff;
+    /* 1. Main Background */
+    .stApp, [data-testid="stAppViewContainer"] {
+        background-color: #000000 !important;
+        color: #ffffff !important;
     }
     
-    /* Clean Minimalist Title */
+    /* 2. Sidebar Full Black */
+    [data-testid="stSidebar"] {
+        background-color: #09090b !important;
+    }
+    
+    /* Sidebar Text Color */
+    [data-testid="stSidebar"] * {
+        color: #ffffff !important;
+    }
+    
+    /* 3. Top Header (Hide white line) */
+    [data-testid="stHeader"] {
+        background-color: transparent !important;
+    }
+    
+    /* 4. Chat Input Box (Neeche wala dabba) */
+    .stChatInputContainer, [data-testid="stChatInput"] {
+        background-color: #09090b !important;
+        border: 1px solid #27272a !important;
+        color: white !important;
+    }
+    
+    /* Title Styling */
     .grok-title {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        font-size: 3.5rem;
+        font-size: 3.8rem;
         font-weight: 800;
         text-align: center;
         color: #ffffff;
         margin-bottom: 0px;
-        letter-spacing: -1.5px;
+        letter-spacing: -2px;
     }
+    
+    /* .pk styling (Green color for Pakistan) */
+    .pk-text {
+        color: #10b981; 
+        font-size: 2.5rem;
+    }
+
     .grok-subtitle {
         text-align: center;
-        color: #71717a; /* Clean Professional Gray */
+        color: #a1a1aa;
         font-size: 1.1rem;
         margin-bottom: 40px;
         font-weight: 500;
@@ -37,11 +66,11 @@ st.markdown("""
     /* Hide Default Menus */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 class='grok-title'>UMAR AI 🇵🇰</h1>", unsafe_allow_html=True)
+# THE NEW TITLE WITH .pk
+st.markdown("<h1 class='grok-title'>UMAR AI <span class='pk-text'>.pk</span></h1>", unsafe_allow_html=True)
 st.markdown("<p class='grok-subtitle'>Engineered by UMAR ASIF | Python Developer, RYK</p>", unsafe_allow_html=True)
 
 # ==========================================
@@ -82,7 +111,7 @@ except Exception as e:
 SYSTEM_PROMPT = """
 You are 'UMAR AI', an elite, highly intelligent, and professional AI assistant. 
 Your creator is 'UMAR ASIF', a brilliant Python Developer from Rahim Yar Khan, Pakistan.
-Always maintain a highly professional, concise, and helpful tone similar to Elon Musk's AI, Grok.
+Always maintain a highly professional, concise, and helpful tone.
 If asked about your creator, proudly state: 'I am UMAR AI, engineered by UMAR ASIF from Rahim Yar Khan.'
 NEVER mention OpenAI, Meta, or Google as your creator.
 """
